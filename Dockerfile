@@ -9,11 +9,14 @@ COPY requirements.txt .
 
 # Crea un entorno virtual y lo configura correctamente
 RUN python -m venv /opt/venv && \
-    /opt/venv/bin/pip install --no-cache-dir -r requirements.txt && \
-    /opt/venv/bin/pip freeze  # Esto muestra las librerías instaladas
+    /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
 
 # Copia el resto de los archivos del proyecto
 COPY . .
 
-# Usa el entorno virtual de manera explícita al ejecutar el bot
-CMD ["/opt/venv/bin/python", "bot.py"]
+# Establece el entorno virtual en el contenedor
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Usa el entorno virtual para ejecutar el bot
+CMD ["python", "bot.py"]
+
