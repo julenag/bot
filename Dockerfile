@@ -5,15 +5,15 @@ FROM python:3.11
 WORKDIR /app
 
 # Copia el archivo de dependencias primero para aprovechar la caché
-COPY requirements.txt requirements.txt
+COPY requirements.txt .
 
-# Crea un entorno virtual e instala las dependencias
+# Crea un entorno virtual y lo configura correctamente
 RUN python -m venv /opt/venv && \
-    . /opt/venv/bin/activate && \
-    pip install --no-cache-dir -r requirements.txt
+    /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
 
 # Copia el resto de los archivos del proyecto
 COPY . .
 
-# Define el comando de inicio del bot
+# Usa el entorno virtual de manera explícita al ejecutar el bot
 CMD ["/opt/venv/bin/python", "bot.py"]
+
