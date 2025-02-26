@@ -17,6 +17,8 @@ COPY . .
 # Establece el entorno virtual en el contenedor
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Usa el entorno virtual para ejecutar el bot
-CMD ["python", "bot.py"]
+# Verifica que el entorno virtual se está utilizando
+RUN /opt/venv/bin/python -m pip freeze
 
+# Usa el entorno virtual para ejecutar el bot
+CMD ["/opt/venv/bin/python", "bot.py"]
