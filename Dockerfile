@@ -15,8 +15,5 @@ RUN python -m venv /opt/venv && \
 # Copia el resto de los archivos del proyecto
 COPY . .
 
-# Expone el puerto (si el bot necesita recibir conexiones)
-EXPOSE 8000  # Cambia este valor si tu aplicación usa otro puerto
-
 # Define el comando de inicio del bot
 CMD ["/opt/venv/bin/python", "bot.py"]
