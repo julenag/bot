@@ -317,7 +317,9 @@ async def main():
         await application.run_polling(drop_pending_updates=True, allowed_updates=Update.ALL_TYPES)
 
     except Exception as e:
-        logger.error(f"Error en el bot: {e}")
+        import traceback
+        logger.error(f"Error en el bot: {e}\n{traceback.format_exc()}")
+
 
 
 if __name__ == '__main__':
