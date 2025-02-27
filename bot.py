@@ -48,10 +48,30 @@ async def init_db():
     """Inicializa la conexión a la base de datos y crea la tabla si no existe."""
     global DB_POOL
     db_url = os.getenv("DATABASE_URL")
+
     if not db_url:
-        logger.error("❌ ERROR: DATABASE_URL no está configurada")
+        print("❌ ERROR: DATABASE_URL no está configurada")
         exit(1)
-    logger.info(f"🔍 Intentando conectar a: {db_url}")
+
+    # Reemplazar 'postgresql://' por 'postgres://'
+    db_url = db_url.replace("postgresql://", "postgres://")
+
+    # Asegurar conexión SSL
+    if "sslmode" not in db_url:
+        db_url += "?sslmode=require"
+
+    for intento in range(5):  # Reintentar hasta 5 veces
+        try:
+            global DB_POOL
+            DB_POOL = await asyncpg.create_pool(dsn=db_url)
+            print("✅ Conectado a la base de datos")
+            return
+        except Exception as e:
+            print(f"⚠️ Error conectando a la base de datos (Intento {intento+1}/5): {e}")
+            await asyncio.sleep(2 ** intento)  # Esperar (2, 4, 8, 16s)
+
+    print("❌ No se pudo conectar a la base de datos después de varios intentos")
+    exit(1)
 
     DB_POOL = await asyncpg.create_pool(dsn=db_url)
     async with DB_POOL.acquire() as connection:
