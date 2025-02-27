@@ -49,7 +49,10 @@ async def init_db():
     global DB_POOL
     db_url = os.getenv("DATABASE_URL")
     if not db_url:
-        raise Exception("DATABASE_URL no está configurada")
+        logger.error("❌ ERROR: DATABASE_URL no está configurada")
+        exit(1)
+    logger.info(f"🔍 Intentando conectar a: {db_url}")
+
     DB_POOL = await asyncpg.create_pool(dsn=db_url)
     async with DB_POOL.acquire() as connection:
         await connection.execute(''' 
