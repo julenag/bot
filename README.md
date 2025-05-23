@@ -6,6 +6,12 @@ solicitudes para recibir notificaciones cuando los billetes estén disponibles.
 > **Nota:** Este bot **no realiza la búsqueda automática de billetes en la web de Renfe**, sino que sirve para gestionar y
             almacenar las preferencias de viaje, facilitando la notificación cuando se integre una fuente real de disponibilidad.
 
+## ⚠️ Estado del Proyecto
+
+Este proyecto **no ha sido revisado ni actualizado en bastante tiempo**.  
+Puede contener código desactualizado o necesitar ajustes para funcionar correctamente con versiones actuales de dependencias o 
+servicios externos.  Se recomienda revisar y probar antes de usarlo.
+
 # 🖥️ Ejecución en servidor o plataforma online
 Este bot está diseñado para funcionar de forma continua en un servidor o en una plataforma online que soporte Python, como por 
 ejemplo:
