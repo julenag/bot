@@ -12,6 +12,7 @@ ejemplo:
 
 Replit: Puedes subir el código y configurar las variables de entorno en la sección "Secrets". Replit permite que el bot se mantenga 
 activo 24/7 sin interrupciones.
+
 Servidores VPS o cloud (DigitalOcean, AWS, Heroku, etc.): Puedes desplegar el bot en un servidor Linux, asegurándote de instalar 
 Python, configurar las variables de entorno y ejecutar el script con screen o tmux para que corra en segundo plano.
 
